@@ -91,136 +91,136 @@ const SIZE_CONFIG = {
 } as const;
 
 // 단일 통합 컴포넌트
-export const MessageBubble = React.memo<MessageBubbleProps>(
-  ({
-    children,
-    className = "",
+function MessageBubbleComponent({
+  children,
+  className = "",
 
-    // 크기 관련
-    size = "md",
-    minWidth,
-    maxWidth,
+  // 크기 관련
+  size = "md",
+  minWidth,
+  maxWidth,
 
-    // 방향 및 변형
-    flipped = false,
+  // 방향 및 변형
+  flipped = false,
 
-    // 위치 관련
-    position = "relative",
-    top,
-    left,
-    right,
-    bottom,
+  // 위치 관련
+  position = "relative",
+  top,
+  left,
+  right,
+  bottom,
 
-    // 스타일링
-    zIndex = 1000,
-    style = {},
+  // 스타일링
+  zIndex = 1000,
+  style = {},
 
-    // 고급 옵션
-    priority = false,
-    onClick,
-  }) => {
-    const config = SIZE_CONFIG[size];
+  // 고급 옵션
+  priority = false,
+  onClick,
+}: MessageBubbleProps) {
+  const config = SIZE_CONFIG[size];
 
-    // 통합된 스타일 계산
-    const containerStyle: React.CSSProperties = {
-      position,
-      zIndex,
-      minWidth: minWidth || config.minWidth,
-      maxWidth: maxWidth || config.maxWidth,
-      ...(top !== undefined && { top }),
-      ...(left !== undefined && { left }),
-      ...(right !== undefined && { right }),
-      ...(bottom !== undefined && { bottom }),
-      ...style,
-    };
+  // 통합된 스타일 계산
+  const containerStyle: React.CSSProperties = {
+    position,
+    zIndex,
+    minWidth: minWidth || config.minWidth,
+    maxWidth: maxWidth || config.maxWidth,
+    ...(top !== undefined && { top }),
+    ...(left !== undefined && { left }),
+    ...(right !== undefined && { right }),
+    ...(bottom !== undefined && { bottom }),
+    ...style,
+  };
 
-    const svgStyle: React.CSSProperties = {
-      transform: flipped ? "scaleY(-1)" : "none",
-      width: "100%",
-      height: "auto",
-      minHeight: `${config.height}px`,
-    };
+  const svgStyle: React.CSSProperties = {
+    transform: flipped ? "scaleY(-1)" : "none",
+    width: "100%",
+    height: "auto",
+    minHeight: `${config.height}px`,
+  };
 
-    // 클릭 가능한 컨테이너 클래스
-    const interactiveClass = onClick
-      ? "cursor-pointer hover:scale-105 transition-transform duration-200"
-      : "";
+  // 클릭 가능한 컨테이너 클래스
+  const interactiveClass = onClick
+    ? "cursor-pointer hover:scale-105 transition-transform duration-200"
+    : "";
 
-    return (
-      <div
-        className={`relative inline-block ${interactiveClass} ${className}`}
-        style={containerStyle}
-        onClick={onClick}
-        role={onClick ? "button" : undefined}
-        tabIndex={onClick ? 0 : undefined}
-        onKeyDown={
-          onClick
-            ? (e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  onClick();
-                }
+  return (
+    <div
+      className={`relative inline-block ${interactiveClass} ${className}`}
+      style={containerStyle}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick();
               }
-            : undefined
-        }
-      >
-        {/* SVG 배경 */}
-        <div className="absolute inset-0 w-full h-full">
-          <Image
-            src="asset/message_bubble.svg"
-            alt="말풍선"
-            width={config.width}
-            height={config.height}
-            className="w-full h-full object-fill"
-            style={svgStyle}
-            priority={priority}
-          />
-        </div>
+            }
+          : undefined
+      }
+    >
+      {/* SVG 배경 */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="asset/message_bubble.svg"
+          alt="말풍선"
+          width={config.width}
+          height={config.height}
+          className="w-full h-full object-fill"
+          style={svgStyle}
+          priority={priority}
+        />
+      </div>
 
-        {/* 텍스트 컨텐츠 */}
-        <div
-          className={`
+      {/* 텍스트 컨텐츠 */}
+      <div
+        className={`
           relative z-10 
           ${config.fontSize}
           text-center
           leading-tight
           h-full
         `}
-          style={{
-            minHeight: `${config.height}px`,
-            // 말풍선 모양에 맞춘 정확한 텍스트 영역
-            paddingTop: flipped
-              ? `${config.textArea.bottom}%`
-              : `${config.textArea.top}%`,
-            paddingBottom: flipped
-              ? `${config.textArea.top}%`
-              : `${config.textArea.bottom}%`,
-            paddingLeft: `${config.textArea.left}%`,
-            paddingRight: `${config.textArea.right}%`,
-            // 상단부터 텍스트 시작
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            whiteSpace: "pre-line",
-            overflow: "hidden",
-          }}
-        >
-          {typeof children === "string"
-            ? // 문자열인 경우 \n으로 줄바꿈 처리
-              children.split("\n").map((line, index) => (
-                <div key={index} className={index > 0 ? "mt-1" : ""}>
-                  {line || "\u00A0"} {/* 빈 줄도 공간 유지 */}
-                </div>
-              ))
-            : children}
-        </div>
+        style={{
+          minHeight: `${config.height}px`,
+          // 말풍선 모양에 맞춘 정확한 텍스트 영역
+          paddingTop: flipped
+            ? `${config.textArea.bottom}%`
+            : `${config.textArea.top}%`,
+          paddingBottom: flipped
+            ? `${config.textArea.top}%`
+            : `${config.textArea.bottom}%`,
+          paddingLeft: `${config.textArea.left}%`,
+          paddingRight: `${config.textArea.right}%`,
+          // 상단부터 텍스트 시작
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          whiteSpace: "pre-line",
+          overflow: "hidden",
+        }}
+      >
+        {typeof children === "string"
+          ? // 문자열인 경우 \n으로 줄바꿈 처리
+            children.split("\n").map((line, index) => (
+              <div key={index} className={index > 0 ? "mt-1" : ""}>
+                {line || "\u00A0"} {/* 빈 줄도 공간 유지 */}
+              </div>
+            ))
+          : children}
       </div>
-    );
-  },
-);
+    </div>
+  );
+}
 
-MessageBubble.displayName = "MessageBubble";
+MessageBubbleComponent.displayName = "MessageBubble";
+
+export const MessageBubble = React.memo(MessageBubbleComponent);
 
 //--------------------------------
 // 편의를 위한 헬퍼 함수들 (컴포넌트 생성 대신 함수로 변경)
