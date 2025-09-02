@@ -1,5 +1,5 @@
 export function formatKoreanDate(dateString: string): string {
-  const [datePart, timePart] = dateString.split("");
+  const [datePart, timePart] = dateString.split(" ");
 
   const [year, month, day] = datePart.split("-");
 

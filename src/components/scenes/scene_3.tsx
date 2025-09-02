@@ -1,6 +1,6 @@
 import Image from "next/image";
 import MessageBubble from "../ui/message-bubble";
-import { SajuTable } from "../features/saju-table";
+import { SajuTable } from "../features/saju-table/saju-table";
 export function Scene3() {
   return (
     <div className="w-full relative">
