@@ -41,8 +41,8 @@ const SIZE_CONFIG = {
     maxWidth: "280px",
     // 말풍선 모양별 텍스트 안전 영역 (%)
     textArea: {
-      top: 25, // 위쪽 여백
-      bottom: 30, // 아래쪽 여백 (꼬리 부분)
+      top: 15, // 위쪽 여백
+      bottom: 22, // 아래쪽 여백 (꼬리 부분)
       left: 15, // 왼쪽 여백
       right: 15, // 오른쪽 여백
     },
@@ -55,8 +55,8 @@ const SIZE_CONFIG = {
     minWidth: "280px",
     maxWidth: "350px",
     textArea: {
-      top: 22,
-      bottom: 28,
+      top: 17,
+      bottom: 25,
       left: 14,
       right: 14,
     },
@@ -172,7 +172,7 @@ export const MessageBubble = React.memo<MessageBubbleProps>(
             alt="말풍선"
             width={config.width}
             height={config.height}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-fill"
             style={svgStyle}
             priority={priority}
           />
