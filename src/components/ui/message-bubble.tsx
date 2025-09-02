@@ -33,26 +33,39 @@ interface MessageBubbleProps {
 // 실제 말풍선 크기(215*139)를 기준으로 한 설정
 const SIZE_CONFIG = {
   sm: {
-    width: 215,
-    height: 139,
+    width: 170,
+    height: 110,
     fontSize: "text-xs",
     padding: "p-3",
-    minWidth: "215px",
-    maxWidth: "280px",
-    // 말풍선 모양별 텍스트 안전 영역 (%)
+    minWidth: "170px",
+    maxWidth: "220px",
     textArea: {
-      top: 15, // 위쪽 여백
-      bottom: 22, // 아래쪽 여백 (꼬리 부분)
-      left: 15, // 왼쪽 여백
-      right: 15, // 오른쪽 여백
+      top: 15,
+      bottom: 22,
+      left: 15,
+      right: 15,
     },
   },
   md: {
-    width: 280,
-    height: 181,
+    width: 215,
+    height: 139,
     fontSize: "text-sm",
     padding: "p-4",
-    minWidth: "280px",
+    minWidth: "215px",
+    maxWidth: "280px",
+    textArea: {
+      top: 16,
+      bottom: 22,
+      left: 15,
+      right: 15,
+    },
+  },
+  lg: {
+    width: 239,
+    height: 139,
+    fontSize: "text-md",
+    padding: "p-5",
+    minWidth: "270px",
     maxWidth: "350px",
     textArea: {
       top: 17,
@@ -61,32 +74,18 @@ const SIZE_CONFIG = {
       right: 14,
     },
   },
-  lg: {
-    width: 350,
-    height: 226,
-    fontSize: "text-base",
-    padding: "p-5",
-    minWidth: "350px",
+  xl: {
+    width: 270,
+    height: 210,
+    fontSize: "text-lg",
+    padding: "p-6",
+    minWidth: "325px",
     maxWidth: "450px",
     textArea: {
       top: 20,
       bottom: 26,
       left: 13,
       right: 13,
-    },
-  },
-  xl: {
-    width: 430,
-    height: 278,
-    fontSize: "text-lg",
-    padding: "p-6",
-    minWidth: "430px",
-    maxWidth: "550px",
-    textArea: {
-      top: 18,
-      bottom: 24,
-      left: 12,
-      right: 12,
     },
   },
 } as const;
@@ -184,7 +183,7 @@ export const MessageBubble = React.memo<MessageBubbleProps>(
           relative z-10 
           ${config.fontSize}
           text-center
-          leading-relaxed
+          leading-tight
           h-full
         `}
           style={{
@@ -223,6 +222,7 @@ export const MessageBubble = React.memo<MessageBubbleProps>(
 
 MessageBubble.displayName = "MessageBubble";
 
+//--------------------------------
 // 편의를 위한 헬퍼 함수들 (컴포넌트 생성 대신 함수로 변경)
 export const createBubble =
   (defaultProps: Partial<MessageBubbleProps>) =>

@@ -1,7 +1,15 @@
 import Image from "next/image";
+import MessageBubble from "../ui/message-bubble";
 export function Scene3() {
   return (
-    <div className="w-full">
+    <div className="w-full relative">
+      <MessageBubble
+        size="lg"
+        position="absolute"
+        style={{ top: -100, left: 35 }}
+      >
+        {"제가 민곤님의 사주를\n보기 쉽게 표로 정리했어요"}
+      </MessageBubble>
       <Image
         src="/asset/background/webtoon_3.png"
         alt="웹툰 3"

@@ -11,22 +11,8 @@ const BubbleShowcasePage = () => {
   const [customText, setCustomText] = useState(
     "이제 본격적으로\nOO님의 사주팔자를\n분석해 차례네요.",
   );
-  const [textAlign, setTextAlign] = useState<"left" | "center" | "right">(
-    "center",
-  );
-  const [verticalAlign, setVerticalAlign] = useState<
-    "top" | "center" | "bottom"
-  >("center");
-  const [zIndex, setZIndex] = useState(1000);
 
-  // 샘플 텍스트들
-  const sampleTexts = [
-    "안녕!",
-    "안녕하세요!",
-    "오늘 날씨가 정말 좋네요!",
-    "웹툰 말풍선 컴포넌트 테스트입니다. 긴 텍스트도 잘 들어가는지 확인해보세요!",
-    "정말로 매우 긴 텍스트를 넣어서 말풍선이 어떻게 반응하는지 테스트해보겠습니다. 반응형으로 잘 작동하나요?",
-  ];
+  const [zIndex, setZIndex] = useState(1000);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-8">
@@ -112,38 +98,6 @@ const BubbleShowcasePage = () => {
               <p className="text-xs text-gray-500 mt-1">
                 \\n으로 줄바꿈 제어 (자동 줄바꿈 없음)
               </p>
-            </div>
-
-            {/* 가로 정렬 */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                가로 정렬
-              </label>
-              <select
-                value={textAlign}
-                onChange={(e) => setTextAlign(e.target.value as any)}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="left">왼쪽 정렬</option>
-                <option value="center">가운데 정렬</option>
-                <option value="right">오른쪽 정렬</option>
-              </select>
-            </div>
-
-            {/* 세로 정렬 */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                세로 정렬
-              </label>
-              <select
-                value={verticalAlign}
-                onChange={(e) => setVerticalAlign(e.target.value as any)}
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="top">위쪽 정렬</option>
-                <option value="center">가운데 정렬</option>
-                <option value="bottom">아래쪽 정렬</option>
-              </select>
             </div>
           </div>
         </div>

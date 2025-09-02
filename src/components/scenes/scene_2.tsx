@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Scene2() {
   return (
-    <div className="flex w-full h-full justify-between items-end py-5 ">
+    <div className="flex w-full h-full justify-between items-end py-5 mb-5 ">
       <div className="flex flex-col h-full justify-end">
         <Image
           src="/asset/white_deco.svg"
