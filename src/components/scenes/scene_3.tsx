@@ -1,6 +1,6 @@
 import Image from "next/image";
 import MessageBubble from "../ui/message-bubble";
-import { SajuTable } from "../features/saju-table/saju-table";
+import { MySaju } from "./my-saju";
 export function Scene3() {
   return (
     <div className="w-full relative">
@@ -18,7 +18,7 @@ export function Scene3() {
         height={410} // 실제 이미지 높이로 교체하세요
         className="w-full"
       />
-      <SajuTable />
+      <MySaju />
     </div>
   );
 }

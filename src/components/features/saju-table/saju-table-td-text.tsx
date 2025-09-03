@@ -1,5 +1,3 @@
-import { SajuTableTdCard } from "./saju-table-td-card";
-
 interface FormatTextProps {
   text: string;
 }
@@ -7,9 +5,9 @@ export const FormatText = ({ text }: FormatTextProps) => {
   const [chi, han] = text.split(" ");
 
   return (
-    <p className="flex flex-col">
-      <span className="text-lg">{chi}</span>
-      <span className="text-[10px] font-bold">{`(${han})`}</span>
+    <p className="flex flex-col w-full items-center">
+      <span className="text-lg w-fit font-bold ">{chi}</span>
+      <span className="text-[10px] font-bold w-fit">{`(${han})`}</span>
     </p>
   );
 };
@@ -30,7 +28,7 @@ export function SajuTableTdText({ value }: SajuTableTdTextProps) {
   }
 
   if (value === "") {
-    return <span className="text-gray-400">(없음)</span>;
+    return <span className="font-bold">(없음)</span>;
   }
 
   return <FormatText text={value} />;
