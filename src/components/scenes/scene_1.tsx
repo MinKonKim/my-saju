@@ -1,7 +1,8 @@
-import Image from "next/image";
-import MessageBubble from "../ui/message-bubble";
 import useNarrowView from "@/hooks/useNarrowView";
+import SajuData from "@/lib/saju-data.json";
+import Image from "next/image";
 import { useRef } from "react";
+import MessageBubble from "../ui/message-bubble";
 export function Scene1() {
   const mainRef = useRef<HTMLDivElement>(null);
   const isNarrow = useNarrowView(mainRef, 350);
@@ -21,7 +22,7 @@ export function Scene1() {
           position="absolute"
           flipped
         >
-          {"이제 본격적으로\n OO님의 사주팔자를\n 분석해볼 차례네요."}
+          {`이제 본격적으로\n ${SajuData.info.name.slice(1)}님의 사주팔자를\n 분석해볼 차례네요.`}
         </MessageBubble>
       </div>
     </div>

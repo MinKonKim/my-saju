@@ -1,15 +1,16 @@
+import SajuData from "@/lib/saju-data.json";
 import Image from "next/image";
 import MessageBubble from "../ui/message-bubble";
 import { MySaju } from "./my-saju";
 export function Scene3() {
   return (
-    <div className="w-full relative">
+    <div className="w-full relative flex flex-col items-center">
       <MessageBubble
         size="lg"
         position="absolute"
         style={{ top: -100, left: 35 }}
       >
-        {"제가 민곤님의 사주를\n보기 쉽게 표로 정리했어요"}
+        {`제가 ${SajuData.info.name.slice(1)}님의 사주를\n보기 쉽게 표로 정리했어요`}
       </MessageBubble>
       <Image
         src="/asset/background/webtoon_3.png"
@@ -18,7 +19,7 @@ export function Scene3() {
         height={410} // 실제 이미지 높이로 교체하세요
         className="w-full"
       />
-      <MySaju />
+      <MySaju sajuData={SajuData} />
     </div>
   );
 }
