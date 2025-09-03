@@ -58,8 +58,8 @@ export function SceneOne() {
         style={{ opacity: gradientOpacity }}
       />
 
-      {isImageAnimationComplete && (
-        <div className="relative w-full h-20 bg-[#F3F2EF]">
+      <div className="relative w-full h-20 bg-[#F3F2EF]">
+        {isImageAnimationComplete && (
           <MessageBubble
             size={isNarrow ? "md" : "lg"}
             style={{ top: "-50px", left: "24px" }}
@@ -70,8 +70,8 @@ export function SceneOne() {
               1,
             )}님의 사주팔자를\n 분석해볼 차례네요.`}
           </MessageBubble>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

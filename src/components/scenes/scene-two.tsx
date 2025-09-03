@@ -7,9 +7,9 @@ export function SceneTwo() {
       <motion.div
         className="flex flex-col h-full justify-end"
         initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
-        viewport={{ once: true, amount: 0.7 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.7 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
         <Image
           src="/asset/white_deco.svg"
@@ -22,8 +22,8 @@ export function SceneTwo() {
         className="pr-4"
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, ease: "easeOut", delay: 0.7 }}
-        viewport={{ once: true, amount: "some" }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.7 }}
+        viewport={{ once: true, margin: "100px", amount: 0.3 }}
       >
         <Image
           src="/asset/background/webtoon_2.png"
