@@ -1,25 +1,38 @@
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export function Scene2() {
   return (
-    <div className="flex w-full h-full justify-between items-end py-5 mb-5 ">
-      <div className="flex flex-col h-full justify-end">
+    <div className="flex w-full h-full justify-between items-end py-5 mb-5 overflow-hidden">
+      <motion.div
+        className="flex flex-col h-full justify-end"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
+        viewport={{ once: true }}
+      >
         <Image
           src="/asset/white_deco.svg"
           alt="문양"
           width={153}
           height={120}
         />
-      </div>
-      <div className="pr-4">
+      </motion.div>
+      <motion.div
+        className="pr-4"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+        viewport={{ once: true }}
+      >
         <Image
           src="/asset/background/webtoon_2.png"
           alt="웹툰 2"
-          width={161} // 실제 이미지 너비로 교체하세요
-          height={285} // 실제 이미지 높이로 교체하세요
+          width={161}
+          height={285}
           sizes="100vw "
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

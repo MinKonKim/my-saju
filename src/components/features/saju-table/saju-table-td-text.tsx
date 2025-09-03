@@ -6,7 +6,7 @@ export const FormatText = ({ text }: FormatTextProps) => {
 
   return (
     <p className="flex flex-col w-full items-center">
-      <span className="text-lg w-fit font-bold ">{chi}</span>
+      <span className="text-sm xs:text-base w-fit font-bold ">{chi}</span>
       <span className="text-[10px] font-bold w-fit">{`(${han})`}</span>
     </p>
   );

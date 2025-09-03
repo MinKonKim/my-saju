@@ -1,4 +1,4 @@
-import { SajuTable } from "../features/saju-table/saju-table";
+import { SajuTable } from "../features/saju-table";
 import { UserInfoHeader } from "../features/user/user-info-header";
 import { CrossDividerLayout } from "../layout/cross-divider-layout";
 interface MySajuProps {

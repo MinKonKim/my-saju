@@ -27,7 +27,7 @@ export function SajuTableTdCard({
       className={`w-full py-1 aspect-square rounded-2xl flex flex-col items-center justify-center ${cardStyle}`}
     >
       <p className="text-[8px]">{label}</p>
-      <p className="font-bold text-3xl font-noto">{label_chi}</p>
+      <p className="font-bold text-xl xs:text-2xl font-noto">{label_chi}</p>
       <p className="text-[8px] ">{value}</p>
     </div>
   );

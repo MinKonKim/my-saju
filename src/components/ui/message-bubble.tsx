@@ -1,5 +1,22 @@
-import React from "react";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
+import React from "react";
+
+// 애니메이션 Variants: 가독성과 재사용성을 위해 컴포넌트 외부에 정의
+const bubbleVariants: Variants = {
+  initial: (isFlipped: boolean) => ({
+    opacity: 0,
+    y: isFlipped ? 30 : -30, // 꼬리가 위(flipped)면 아래에서, 아니면 위에서 나타남
+  }),
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 // 통합된 타입 정의
 interface MessageBubbleProps {
@@ -28,6 +45,7 @@ interface MessageBubbleProps {
   // 고급 옵션
   priority?: boolean; // 이미지 우선 로딩
   onClick?: () => void;
+  animationDelay?: number; // 애니메이션 지연 시간
 }
 
 // 실제 말풍선 크기(215*139)를 기준으로 한 설정
@@ -117,6 +135,7 @@ function MessageBubbleComponent({
   // 고급 옵션
   priority = false,
   onClick,
+  animationDelay,
 }: MessageBubbleProps) {
   const config = SIZE_CONFIG[size];
 
@@ -146,7 +165,13 @@ function MessageBubbleComponent({
     : "";
 
   return (
-    <div
+    <motion.div
+      variants={bubbleVariants}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true, amount: 0.8 }}
+      custom={flipped} // variants에 flipped 값을 전달
+      transition={{ delay: animationDelay || 0 }} // 외부에서 받은 delay 적용
       className={`relative inline-block ${interactiveClass} ${className}`}
       style={containerStyle}
       onClick={onClick}
@@ -166,7 +191,7 @@ function MessageBubbleComponent({
       {/* SVG 배경 */}
       <div className="absolute inset-0 w-full h-full">
         <Image
-          src="asset/message_bubble.svg"
+          src="/asset/message_bubble.svg"
           alt="말풍선"
           width={config.width}
           height={config.height}
@@ -214,7 +239,7 @@ function MessageBubbleComponent({
             ))
           : children}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

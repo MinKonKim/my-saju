@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "402px",
+      },
       fontFamily: {
         noto: ["var(--font-noto)", "sans-serif"],
       },
