@@ -86,7 +86,7 @@ const SIZE_CONFIG = {
     minWidth: "270px",
     maxWidth: "350px",
     textArea: {
-      top: 17,
+      top: 18,
       bottom: 25,
       left: 14,
       right: 14,

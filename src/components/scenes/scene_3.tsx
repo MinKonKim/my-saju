@@ -16,6 +16,7 @@ export function Scene3() {
           size="lg"
           position="absolute"
           style={{ top: -100, left: 35 }}
+          animationDelay={0}
         >
           {`제가 ${SajuData.info.name.slice(
             1,
@@ -43,17 +44,16 @@ export function Scene3() {
         {/* 이미지 하단 그라데이션 */}
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white to-transparent" />
       </div>
-      {isImageAnimationComplete && (
-        <motion.div
-          className="w-full mt-[-10px] z-100"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <MySaju sajuData={SajuData} />
-        </motion.div>
-      )}
+
+      <motion.div
+        className="w-full mt-[-10px] z-100"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.2, delay: 0.5 }}
+        viewport={{ once: true }}
+      >
+        <MySaju sajuData={SajuData} />
+      </motion.div>
     </div>
   );
 }

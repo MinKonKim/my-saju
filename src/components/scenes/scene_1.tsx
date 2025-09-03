@@ -30,7 +30,7 @@ export function Scene1() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 1, delay: 0.4 }}
       >
         <Image
           src="/asset/background/webtoon_1.png"

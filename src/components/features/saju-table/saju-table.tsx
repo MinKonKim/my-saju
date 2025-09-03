@@ -2,7 +2,8 @@ import { SajuTableHeader } from "./saju-table-header";
 import { SajuTableTdCard } from "./saju-table-td-card";
 import { SajuTableTdText } from "./saju-table-td-text";
 
-interface SajuTable {
+// 타입 정의
+interface SajuTableProps {
   columns: string[];
   rows: {
     label: string;
@@ -11,18 +12,61 @@ interface SajuTable {
   }[];
 }
 
-export function SajuTable({ columns, rows }: SajuTable) {
+// 공통 스타일 상수
+const baseCellClass = "p-1 size-full break-words align-center bg-[#F9F9F9]";
+const borderRightGray = "border-r border-r-[#8A8A8A]";
+const borderBottomBlack = "border-b-2 border-b-black";
+const borderBottomGray = "border-b border-b-[#8A8A8A]";
+
+// 행 밑줄 클래스 결정 함수
+function getRowBorderClass(label: string) {
+  return label === "천간" ? borderBottomGray : borderBottomBlack;
+}
+
+// 셀 컴포넌트
+function SajuTableCell({
+  value,
+  rowLabel,
+  isLast,
+  bottomBorder,
+}: {
+  value: string | string[];
+  rowLabel: string;
+  isLast: boolean;
+  bottomBorder: string;
+}) {
+  const cellClass = `${baseCellClass} ${!isLast ? borderRightGray : ""} ${bottomBorder}`;
+
   return (
-    <div className="w-full bg-[##F5F3EC] p-2">
+    <td className={cellClass}>
+      {Array.isArray(value) && (rowLabel === "천간" || rowLabel === "지지") ? (
+        <SajuTableTdCard
+          label={value[0]}
+          label_chi={value[1]}
+          value={value[2]}
+        />
+      ) : (
+        <SajuTableTdText value={value} />
+      )}
+    </td>
+  );
+}
+
+// 메인 테이블 컴포넌트
+export function SajuTable({ columns, rows }: SajuTableProps) {
+  return (
+    <div className="w-full bg-[#F5F3EC] p-2">
       {/* 사주 테이블 */}
-      <table className="w-full text-center border-collapse table-fixed border-spacing-0 border-r-2 ">
+      <table className="w-full text-center border-collapse table-fixed border-spacing-0 border-r-2">
         <colgroup>
-          <col className="w-1/5" />
-          <col className="w-1/5" />
-          <col className="w-1/5" />
-          <col className="w-1/5" />
-          <col className="w-1/5" />
+          {columns.map((_, index) => (
+            <col
+              key={index}
+              style={{ width: `${100 / (columns.length + 1)}%` }} // +1은 label col 포함
+            />
+          ))}
         </colgroup>
+
         <thead>
           <tr className="bg-transparent">
             <th className="p-2 border-b-2 border-b-black border-r-2 border-r-black" />
@@ -30,9 +74,7 @@ export function SajuTable({ columns, rows }: SajuTable) {
               <th
                 key={col}
                 className={`p-2 border-b-2 border-b-black font-bold ${
-                  index < columns.length - 1
-                    ? "border-r border-r-[#8A8A8A]"
-                    : ""
+                  index < columns.length - 1 ? borderRightGray : ""
                 }`}
               >
                 <span className="text-base xs:text-lg">{col}</span>
@@ -40,13 +82,10 @@ export function SajuTable({ columns, rows }: SajuTable) {
             ))}
           </tr>
         </thead>
+
         <tbody>
           {rows.map((row) => {
-            let bottomBorderClass = "border-b-2 border-b-black";
-            // 천간 row의 하단 경계선만 1px 회색으로 설정
-            if (row.label === "천간") {
-              bottomBorderClass = "border-b border-b-[#8A8A8A]";
-            }
+            const bottomBorderClass = getRowBorderClass(row.label);
 
             return (
               <tr key={row.label} className="text-sm">
@@ -56,26 +95,15 @@ export function SajuTable({ columns, rows }: SajuTable) {
                 >
                   <SajuTableHeader row={row} />
                 </th>
+
                 {row.values.map((value, index) => (
-                  <td
+                  <SajuTableCell
                     key={index}
-                    className={`p-1 size-full break-words align-center bg-[#F9F9F9] ${
-                      index < row.values.length - 1
-                        ? "border-r border-r-[#8A8A8A]"
-                        : ""
-                    } ${bottomBorderClass}`}
-                  >
-                    {Array.isArray(value) &&
-                    (row.label === "천간" || row.label === "지지") ? (
-                      <SajuTableTdCard
-                        label={value[0]}
-                        label_chi={value[1]}
-                        value={value[2]}
-                      />
-                    ) : (
-                      <SajuTableTdText value={value} />
-                    )}
-                  </td>
+                    value={value}
+                    rowLabel={row.label}
+                    isLast={index === row.values.length - 1}
+                    bottomBorder={bottomBorderClass}
+                  />
                 ))}
               </tr>
             );
