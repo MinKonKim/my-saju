@@ -44,8 +44,9 @@ interface MessageBubbleProps {
 
   // 고급 옵션
   priority?: boolean; // 이미지 우선 로딩
-  onClick?: () => void;
   animationDelay?: number; // 애니메이션 지연 시간
+  onClick?: () => void;
+  onAnimationComplete?: () => void;
 }
 
 // 실제 말풍선 크기(215*139)를 기준으로 한 설정
@@ -136,6 +137,7 @@ function MessageBubbleComponent({
   priority = false,
   onClick,
   animationDelay,
+  onAnimationComplete,
 }: MessageBubbleProps) {
   const config = SIZE_CONFIG[size];
 
@@ -187,6 +189,7 @@ function MessageBubbleComponent({
             }
           : undefined
       }
+      onAnimationComplete={onAnimationComplete}
     >
       {/* SVG 배경 */}
       <div className="absolute inset-0 w-full h-full">

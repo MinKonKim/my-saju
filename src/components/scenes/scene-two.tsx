@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export function Scene2() {
+export function SceneTwo() {
   return (
-    <div className="flex w-full h-full justify-between items-end py-5 mb-5 overflow-hidden">
+    <div className="flex w-full justify-between items-end py-5 mb-5 overflow-hidden">
       <motion.div
         className="flex flex-col h-full justify-end"
         initial={{ opacity: 0, x: -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.7 }}
       >
         <Image
           src="/asset/white_deco.svg"
@@ -22,8 +22,8 @@ export function Scene2() {
         className="pr-4"
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: "easeOut", delay: 0.7 }}
+        viewport={{ once: true, amount: "some" }}
       >
         <Image
           src="/asset/background/webtoon_2.png"

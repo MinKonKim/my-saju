@@ -1,22 +1,27 @@
+import useNarrowView from "@/hooks/useNarrowView";
 import SajuData from "@/lib/saju-data.json";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import MessageBubble from "../ui/message-bubble";
 import { MySaju } from "./my-saju";
 
-export function Scene3() {
+export function SceneThree() {
   const [isImageAnimationComplete, setIsImageAnimationComplete] =
     useState(false);
-
+  const [isBubbleAnimationComplete, setIsBubbleAnimationComplete] =
+    useState(false);
+  const mainRef = useRef<HTMLDivElement>(null);
+  const isNarrow = useNarrowView(mainRef);
   return (
-    <div className="w-full relative flex flex-col items-center">
+    <div className="w-full relative flex flex-col items-center" ref={mainRef}>
       {isImageAnimationComplete && (
         <MessageBubble
-          size="lg"
+          size={isNarrow ? "lg" : "xl"}
           position="absolute"
-          style={{ top: -100, left: 35 }}
+          style={isNarrow ? { top: -100, left: 35 } : { top: -130, left: 40 }}
           animationDelay={0}
+          onAnimationComplete={() => setIsBubbleAnimationComplete(true)}
         >
           {`제가 ${SajuData.info.name.slice(
             1,
@@ -32,7 +37,6 @@ export function Scene3() {
           height={410}
           className="w-full"
         />
-        {/* 흰색 오버레이 FADE OUT 효과 */}
         <motion.div
           className="absolute inset-0 bg-white/80"
           initial={{ opacity: 1 }}
@@ -45,15 +49,17 @@ export function Scene3() {
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white to-transparent" />
       </div>
 
-      <motion.div
-        className="w-full mt-[-10px] z-100"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.2, delay: 0.5 }}
-        viewport={{ once: true }}
-      >
-        <MySaju sajuData={SajuData} />
-      </motion.div>
+      {isBubbleAnimationComplete && (
+        <motion.div
+          className="w-full mt-[-10px] z-100"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.2, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <MySaju sajuData={SajuData} />
+        </motion.div>
+      )}
     </div>
   );
 }

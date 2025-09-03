@@ -2,12 +2,12 @@ import useNarrowView from "@/hooks/useNarrowView";
 import SajuData from "@/lib/saju-data.json";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import MessageBubble from "../ui/message-bubble";
 
-export function Scene1() {
+export function SceneOne() {
   const mainRef = useRef<HTMLDivElement>(null);
-  const isNarrow = useNarrowView(mainRef, 350);
+  const isNarrow = useNarrowView(mainRef);
 
   const { scrollYProgress } = useScroll({
     target: mainRef,
@@ -20,10 +20,13 @@ export function Scene1() {
     [0, 1], // 투명도를 0에서 1로 변경
   );
 
+  const [isImageAnimationComplete, setIsImageAnimationComplete] =
+    useState(false);
+
   return (
     <div
       ref={mainRef}
-      className="relative flex flex-col items-center justify-center overflow-hidden w-full"
+      className="relative flex flex-col items-center justify-center  w-full"
     >
       <motion.div
         className="w-full"
@@ -41,14 +44,18 @@ export function Scene1() {
         />
       </motion.div>
 
+      {/* New White Smoke Effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white/60 to-transparent" />
+
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-black to-transparent h-2/5"
         style={{ opacity: gradientOpacity }}
+        onAnimationComplete={() => setIsImageAnimationComplete(true)}
       />
 
-      <div className="relative w-full h-30">
+      <div className="relative w-full h-20 bg-[#F3F2EF]">
         <MessageBubble
-          size={isNarrow ? "sm" : "md"}
+          size={isNarrow ? "md" : "lg"}
           style={{ top: "-50px", left: "24px" }}
           position="absolute"
           flipped

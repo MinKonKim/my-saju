@@ -1,4 +1,5 @@
-import { useState, useEffect, RefObject } from "react";
+import { SMALL_WIDTH_SIZE } from "@/lib/constants";
+import { RefObject, useEffect, useState } from "react";
 
 /**
  * 요소의 ref와 너비 기준점을 받아, 기준점보다 좁은지 여부를 반환하는 훅입니다.
@@ -8,7 +9,7 @@ import { useState, useEffect, RefObject } from "react";
  */
 const useNarrowView = (
   ref: RefObject<HTMLElement | null>,
-  threshold: number,
+  threshold?: number,
 ): boolean => {
   const [isNarrow, setIsNarrow] = useState(false);
 
@@ -22,14 +23,14 @@ const useNarrowView = (
     const observer = new ResizeObserver((entries) => {
       if (entries[0]) {
         const { width } = entries[0].contentRect;
-        setIsNarrow(width < threshold);
+        setIsNarrow(width < (threshold || SMALL_WIDTH_SIZE));
       }
     });
 
     observer.observe(element);
 
     // 초기 상태 설정
-    setIsNarrow(element.clientWidth < threshold);
+    setIsNarrow(element.clientWidth < (threshold || SMALL_WIDTH_SIZE));
 
     return () => {
       observer.disconnect();
