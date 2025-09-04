@@ -1,8 +1,8 @@
-import useNarrowView from "@/hooks/useNarrowView";
+import useNarrowView from "@/hooks/use-narrow-view";
 import SajuData from "@/lib/saju-data.json";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import MessageBubble from "../ui/message-bubble";
 import { MySaju } from "./my-saju";
 
@@ -11,10 +11,9 @@ export function SceneThree() {
     useState(false);
   const [isBubbleAnimationComplete, setIsBubbleAnimationComplete] =
     useState(false);
-  const mainRef = useRef<HTMLDivElement>(null);
-  const isNarrow = useNarrowView(mainRef);
+  const isNarrow = useNarrowView();
   return (
-    <div className="w-full relative flex flex-col items-center" ref={mainRef}>
+    <div className="w-full relative flex flex-col items-center">
       {isImageAnimationComplete && (
         <MessageBubble
           size={isNarrow ? "lg" : "xl"}

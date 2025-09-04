@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // pages/bubble-showcase.tsx
 import MessageBubble from "@/components/ui/message-bubble";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const BubbleShowcasePage = () => {
   const [selectedSize, setSelectedSize] = useState<"sm" | "md" | "lg" | "xl">(

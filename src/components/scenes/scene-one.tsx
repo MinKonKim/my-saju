@@ -1,4 +1,4 @@
-import useNarrowView from "@/hooks/useNarrowView";
+import useNarrowView from "@/hooks/use-narrow-view";
 import SajuData from "@/lib/saju-data.json";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import MessageBubble from "../ui/message-bubble";
 
 export function SceneOne() {
   const mainRef = useRef<HTMLDivElement>(null);
-  const isNarrow = useNarrowView(mainRef);
+  const isNarrow = useNarrowView();
 
   const [isImageAnimationComplete, setIsImageAnimationComplete] =
     useState(false);
